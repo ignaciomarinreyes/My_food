@@ -58,14 +58,12 @@
         }
     </style>
     <body class="text-center">
-        <form class="form-signin" action="FrontServlet" method="POST" >
+        <form class="form-signin" action="" method="POST" >
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="inputEmail" class="sr-only">User</label>
-            <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" autofocus="" value="vlarez">
+            <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" autofocus="">
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" value="1234">
-
-            <input type="hidden" name="command" value="LoginCommand">
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password">
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
