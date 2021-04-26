@@ -17,6 +17,11 @@ import javax.persistence.Table;
 @Table(name = "ingredient")
 public class Ingredient {
 
+    public Ingredient(String name) {
+        this.name = name;
+    }
+ 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,6 +34,14 @@ public class Ingredient {
     private Set<Item> items;  
 
     public Ingredient() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
     

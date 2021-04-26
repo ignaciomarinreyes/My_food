@@ -20,7 +20,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "menu")
 public class Menu {
-
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -43,6 +44,11 @@ public class Menu {
 
     public Menu() {
     }
+
+    public String getName() {
+        return name;
+    }
+    
     
     
 }
