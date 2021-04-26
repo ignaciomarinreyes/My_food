@@ -20,3 +20,13 @@
         }
     </style>
 </head>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">My Food</a>
+
+            <form class="d-flex">
+                <input type="hidden" value="LogOutCommand" name="command">
+                <button class="btn btn-outline-danger" type="submit">Exit</button>
+            </form>
+    </div>
+</nav>
