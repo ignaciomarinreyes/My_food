@@ -8,11 +8,12 @@ import persistence.HibernateUtil;
 public class DAOBase<T> implements IDAOBase<T> {
 
     @Override
-    public void create(T createClase) {
+    public int create(T createClase) {
         Transaction transaction = null;
+        int result = 0;
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(createClase);
+            result = (int) session.save(createClase);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -20,7 +21,7 @@ public class DAOBase<T> implements IDAOBase<T> {
             }
             e.printStackTrace();
         }
-
+        return result;
     }
 
     @Override

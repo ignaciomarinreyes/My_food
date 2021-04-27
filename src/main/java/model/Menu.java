@@ -61,6 +61,9 @@ public class Menu {
     public void addItem(Item item) {
     }
 
-    public void addSection(Section section) {
+    public void setName(String name) {
+        this.name = name;
     }
+    
+    
 }

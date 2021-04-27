@@ -7,14 +7,12 @@ import persistence.dao.DAOMenu;
 public class CreateMenuCommand extends FrontCommand{
     @Override
     public void process() {
-        String parameter = request.getParameter("name");
-
-        DAOMenu menu = new DAOMenu();
-        User usuario = null; // SESSION
-        Menu m = new Menu(parameter, usuario);
-        menu.create(m);
-
-        //request.setAttribute("id", id);
+        String nameMenu = request.getParameter("nameMenu");
+        DAOMenu daoMenu = new DAOMenu();
+        User usuario = (User) request.getSession().getAttribute("user");
+        Menu menu = new Menu(nameMenu, usuario);
+        int idMenu = daoMenu.create(menu);
+        request.setAttribute("idMenu", idMenu);
         forward("/edit_menu.jsp");
     }
 }

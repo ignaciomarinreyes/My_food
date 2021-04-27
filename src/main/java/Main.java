@@ -17,14 +17,8 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         //createDataBase();
         //HibernateUtil.shutdown();
-        DAOUser serviceUser = new DAOUser();
-        User daniel = serviceUser.read(1);
-
-        DAOMenu serviceMenu = new DAOMenu();
-        List<Menu> menus = serviceMenu.findByUser(daniel.getId());
-        for(Menu menu: menus){
-            System.out.println(menu.getName());
-        }
+        DAOIngredient service = new DAOIngredient();
+        service.create(new Ingredient("hola"));
         
     }
 

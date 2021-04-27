@@ -12,43 +12,29 @@ public class AddCommand extends FrontCommand {
 
     String[] stringValues = {"menuName", "itemName", "sectionName"};
 
-    //EDITAR DE CREAR <-
-
     @Override
     public void process() {
-        int id = Integer.parseInt(request.getParameter("id"));
         String parameter = recoverParameter();
         if (parameter == null) {
             forward("/unknown.jsp");
         } else {
-            DAOMenu menu = new DAOMenu();
-
-            Menu me = menu.read(id);
-
+            DAOMenu daoMenu = new DAOMenu();
+            Menu menu = daoMenu.read(Integer.parseInt(request.getParameter("idMenu")));
             switch (parameter) {
                 case "menuName":
-                    //CREAR
-                    User usuario = null; // SESSION
-                    Menu m = new Menu(parameter, usuario);
-                    menu.create(m);
-
+                    menu.setName(request.getParameter(parameter));
+                    daoMenu.update(menu);
                     break;
                 case "itemName":
-                    DAOItem item = new DAOItem();
-                    Item i = new Item(parameter);
-
-                    item.create(i);
-                    me.addItem(i);
-                    //QUE RETORNE EL ID CUANDO SE CREA UN MENU
-                    //MENU.ADD(ITEM)
-                    //CONSTRUCTOR DE ITEM QUE RECIBA EL NOMBRE
+                    DAOItem daoItem = new DAOItem();
+                    Item item = new Item(request.getParameter(parameter));
+                    daoItem.create(item);                    
+                    menu.addItem(item);
                     break;
                 case "sectionName":
-                    DAOSection sect = new DAOSection();
-                    Section section = new Section(parameter);
-
-                    sect.create(section);
-                    me.addSection(section);
+                    DAOSection daoSection = new DAOSection();
+                    Section section = new Section(request.getParameter(parameter));
+                    daoSection.create(section);
                     break;
                 default:
                     forward("/unknown.jsp");
@@ -59,7 +45,7 @@ public class AddCommand extends FrontCommand {
 
     private String recoverParameter() {
         for (int i = 0; i < stringValues.length; i++) {
-            if (request.getParameter(stringValues[i]) != null) return request.getParameter(stringValues[i]);
+            if (request.getParameter(stringValues[i]) != null) return stringValues[i];
         }
         return null;
     }
