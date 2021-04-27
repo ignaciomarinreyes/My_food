@@ -64,6 +64,13 @@ public class Menu {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+
+    public HashSet<Item> getItems() {
+        return (HashSet<Item>) items;
+    }
+
+    public HashSet<Section> getSections(){
+        return null;
+    }
 }

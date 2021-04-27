@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.User" %><%--
   Created by IntelliJ IDEA.
   User: Luicko
   Date: 26/04/2021
@@ -9,6 +9,10 @@
 <html>
 
 <jsp:include page="header.jsp"></jsp:include>
+
+<%
+    User user = (User) session.getAttribute("user"); //MANDAR AL HEADER?
+%>
 
 <body>
 <main class="flex-shrink-0">

@@ -8,6 +8,8 @@ import persistence.dao.DAOItem;
 import persistence.dao.DAOMenu;
 import persistence.dao.DAOSection;
 
+import javax.servlet.http.HttpSession;
+
 public class AddCommand extends FrontCommand {
 
     String[] stringValues = {"menuName", "itemName", "sectionName"};
@@ -15,6 +17,8 @@ public class AddCommand extends FrontCommand {
     @Override
     public void process() {
         String parameter = recoverParameter();
+        HttpSession session = request.getSession(true);
+
         int idMenu = Integer.parseInt(request.getParameter("idMenu"));
         if (parameter == null) {
             forward("/unknown.jsp");
@@ -43,6 +47,8 @@ public class AddCommand extends FrontCommand {
             }
 
             request.setAttribute("idMenu", idMenu);
+            session.setAttribute("menu", menu);
+
             forward("/edit_menu.jsp");
         }
     }
