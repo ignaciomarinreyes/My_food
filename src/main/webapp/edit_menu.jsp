@@ -11,34 +11,37 @@
 
 <body>
 <div class="row">
-    <div class="col">
+    <div class="col-2">
         <form>
-            <label for="menuName" class="col-sm-2 col-form-label">Email</label>
-            <input type="text" class="form-control-plaintext" name="menuName" id="menuName" value="<%= "hola" %>">
+            <label for="menuName" class="col-form-label">Menu Name</label>
+            <input type="text" class="form-control" name="menuName" id="menuName" value="<%= "hola" %>">
+            <input type="hidden" name="idMenu" value="<%= "ID" %>">
             <input type="hidden" name="command" value="AddCommand">
-            <button type="submit">COMOSERA</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </form>
     </div>
 </div>
 <div class="row">
     <div class="col">
         <form>
-            <label for="sectionName" class="col-sm-2 col-form-label">Email</label>
-            <input type="text" class="form-control-plaintext" name="sectionName" id="sectionName" value="<%= "hola" %>">
+            <label for="sectionName" class="col-form-label">Section: </label>
+            <input type="text" class="form-control" name="sectionName" id="sectionName" value="<%= "hola" %>">
             <input type="hidden" name="command" value="AddCommand">
-            <button type="submit">COMOSERA</button>
+            <input type="hidden" name="idMenu" value="<%= "ID" %>">
+
+            <button type="submit" class="btn btn-primary">Add</button>
         </form>
     </div>
 </div>
 <div class="row">
-    <div class="col-2"></div>
     <div class="col">
         <form>
-            <label for="itemName" class="col-sm-2 col-form-label">Email</label>
-            <input type="text" class="form-control-plaintext" name="itemName" id="itemName" value="<%= "hola" %>">
-            <input type="hidden" name="id" value="<%= "value" %>">
+            <label for="itemName" class="col-form-label">Item: </label>
+            <input type="text" class="form-control" name="itemName" id="itemName" value="<%= "hola" %>">
             <input type="hidden" name="command" value="AddCommand">
-            <button type="submit">COMOSERA</button>
+            <input type="hidden" name="idMenu" value="<%= "ID" %>">
+
+            <button type="submit" class="btn btn-primary">Add</button>
         </form>
     </div>
 </div>

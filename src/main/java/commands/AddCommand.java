@@ -15,11 +15,12 @@ public class AddCommand extends FrontCommand {
     @Override
     public void process() {
         String parameter = recoverParameter();
+        int idMenu = Integer.parseInt(request.getParameter("idMenu"));
         if (parameter == null) {
             forward("/unknown.jsp");
         } else {
             DAOMenu daoMenu = new DAOMenu();
-            Menu menu = daoMenu.read(Integer.parseInt(request.getParameter("idMenu")));
+            Menu menu = daoMenu.read(idMenu);
             switch (parameter) {
                 case "menuName":
                     menu.setName(request.getParameter(parameter));
@@ -40,6 +41,9 @@ public class AddCommand extends FrontCommand {
                     forward("/unknown.jsp");
                     break;
             }
+
+            request.setAttribute("idMenu", idMenu);
+            forward("/edit_menu.jsp");
         }
     }
 
