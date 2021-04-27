@@ -2,9 +2,11 @@ package commands;
 
 import model.Item;
 import model.Menu;
+import model.Section;
 import model.User;
 import persistence.dao.DAOItem;
 import persistence.dao.DAOMenu;
+import persistence.dao.DAOSection;
 
 public class AddCommand extends FrontCommand {
 
@@ -36,13 +38,17 @@ public class AddCommand extends FrontCommand {
                     Item i = new Item(parameter);
 
                     item.create(i);
-                    me.add(item);
+                    me.addItem(i);
                     //QUE RETORNE EL ID CUANDO SE CREA UN MENU
                     //MENU.ADD(ITEM)
                     //CONSTRUCTOR DE ITEM QUE RECIBA EL NOMBRE
                     break;
                 case "sectionName":
-                    //FUNCION DE AÑADIR SECTION
+                    DAOSection sect = new DAOSection();
+                    Section section = new Section(parameter);
+
+                    sect.create(section);
+                    me.addSection(section);
                     break;
                 default:
                     forward("/unknown.jsp");

@@ -58,7 +58,9 @@ public class Menu {
         return name;
     }
 
+    public void addItem(Item item) {
+    }
 
-    public void add(DAOItem item) {
+    public void addSection(Section section) {
     }
 }

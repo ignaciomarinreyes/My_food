@@ -28,7 +28,7 @@ public class Section {
     @ManyToMany(mappedBy="sections",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Item> items; 
 
-    public Section() {
+    public Section(String parameter) {
     }
     
     
