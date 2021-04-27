@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import persistence.dao.DAOItem;
 
 
 @Entity
@@ -42,13 +44,21 @@ public class Menu {
     @JoinColumn(nullable = false, name = "id_user", foreignKey = @ForeignKey(name = "fk_menu_to_user"))
     private User user;
 
+    public Menu(String name, User u) {
+        this.name = name;
+        user = u;
+        items = new HashSet<Item>();
+    }
+
     public Menu() {
+
     }
 
     public String getName() {
         return name;
     }
-    
-    
-    
+
+
+    public void add(DAOItem item) {
+    }
 }

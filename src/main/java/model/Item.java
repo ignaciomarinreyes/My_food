@@ -66,7 +66,7 @@ public class Item {
     @ManyToMany(mappedBy="items",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Menu> menus;  
 
-    public Item() {
+    public Item(String parameter) {
     }
     
     
