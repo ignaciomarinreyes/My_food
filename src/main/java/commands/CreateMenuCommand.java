@@ -14,7 +14,7 @@ public class CreateMenuCommand extends FrontCommand{
         String nameMenu = request.getParameter("nameMenu");
         DAOMenu daoMenu = new DAOMenu();
 
-        User usuario = (User) request.getSession().getAttribute("user");
+        User usuario = (User) session.getAttribute("user");
 
         Menu menu = new Menu(nameMenu, usuario);
         int idMenu = daoMenu.create(menu);

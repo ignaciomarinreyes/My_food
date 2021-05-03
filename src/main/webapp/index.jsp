@@ -65,6 +65,8 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password">
 
+            <input type="hidden" name="command" value="LoginCommand">
+
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
 

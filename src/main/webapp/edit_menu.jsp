@@ -13,12 +13,13 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <%
-    Menu menu = (Menu) session.getAttribute("menuObject");
-    int idMenu = Integer.parseInt(request.getParameter("idMenu"));
+    //Menu menu = (Menu) session.getAttribute("menuObject");
+    //int idMenu = Integer.parseInt(request.getParameter("idMenu"));
+    int idMenu = 1;
 
-    HashSet<Item> items = menu.getItems();
-    HashSet<Section> sections = menu.getSections();
-    
+    //HashSet<Item> items = menu.getItems();
+    //HashSet<Section> sections = menu.getSections();
+
 %>
 
 <body>
@@ -34,7 +35,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
+    <div class="col-4">
         <form>
             <label for="sectionName" class="col-form-label">Section: </label>
             <input type="text" class="form-control" name="sectionName" id="sectionName" value="<%= "hola" %>">
@@ -46,10 +47,28 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
+    <div class="col-2">
+
+    </div>
+    <div class="col-4">
         <form>
-            <label for="itemName" class="col-form-label">Item: </label>
+            <label for="itemName" class="form-label">Item: </label>
             <input type="text" class="form-control" name="itemName" id="itemName" value="<%= "hola" %>">
+            <input type="hidden" name="command" value="AddCommand">
+            <input type="hidden" name="idMenu" value="<%= idMenu %>">
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-2">
+        <form>
+            <label for="ingredientName" class="form-label">Ingredient: </label>
+            <input type="text" class="form-control" name="ingredientName" id="ingredientName" value="<%= "hola" %>">
             <input type="hidden" name="command" value="AddCommand">
             <input type="hidden" name="idMenu" value="<%= idMenu %>">
 
