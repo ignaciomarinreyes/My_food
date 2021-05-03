@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -43,6 +44,10 @@ public class Menu {
     @ManyToOne()
     @JoinColumn(nullable = false, name = "id_user", foreignKey = @ForeignKey(name = "fk_menu_to_user"))
     private User user;
+    
+    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Section> sections;
 
     public Menu(String name, User u) {
         this.name = name;
