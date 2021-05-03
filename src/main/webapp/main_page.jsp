@@ -1,4 +1,6 @@
-<%@ page import="model.User" %><%--
+<%@ page import="model.User" %>
+<%@ page import="model.Menu" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Luicko
   Date: 26/04/2021
@@ -12,6 +14,8 @@
 
 <%
     User user = (User) session.getAttribute("user"); //MANDAR AL HEADER?
+    ArrayList<Menu> menuList;
+    menuList = (ArrayList<Menu>) request.getAttribute("menuList");
 %>
 
 <body>
@@ -52,16 +56,20 @@
         </div>
         <br>
         <div class="row">
+            <%
+                for (Menu menu:
+                     menuList) {
+            %>
             <div class="col-3">
                 <!-- SE DEBERÍA ACOMODAR EL WITH -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">TITULO MENÚ</h5>
+                        <h5 class="card-title"><%= menu.getName() %></h5>
                         <div class="container">
                             <div class="row">
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="EditMenuCommand">
-                                    <input type="hidden" name="id" value="NUMERO">
+                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
                                     <button type="submit" class="btn btn-outline-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
@@ -72,7 +80,7 @@
                                 </form>
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="PreviewCommand">
-                                    <input type="hidden" name="id" value="NUMERO">
+                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
                                     <button type="submit" class="btn btn-outline-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
@@ -84,7 +92,7 @@
                                 </form>
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="DeleteMenuCommand">
-                                    <input type="hidden" name="id" value="NUMERO">
+                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
                                     <button type="submit" class="btn btn-outline-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
@@ -100,6 +108,9 @@
                     </div>
                 </div>
             </div>
+            <%
+                }
+            %>
 
         </div>
     </div>

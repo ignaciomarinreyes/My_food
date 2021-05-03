@@ -71,11 +71,19 @@ public class Menu {
     }
 
 
-    public HashSet<Item> getItems() {
-        return (HashSet<Item>) items;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public HashSet<Section> getSections(){
-        return null;
+    public Set<Section> getSections(){
+        return sections;
+    }
+
+    public void addSection(Section section) {
+        this.sections.add(section);
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

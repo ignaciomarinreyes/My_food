@@ -11,15 +11,18 @@ public class CreateMenuCommand extends FrontCommand{
     public void process() {
         HttpSession session = request.getSession(true);
 
-        String nameMenu = request.getParameter("nameMenu");
-        DAOMenu daoMenu = new DAOMenu();
-
         User usuario = (User) session.getAttribute("user");
+
+        String nameMenu = request.getParameter("menuName");
+
+        DAOMenu daoMenu = new DAOMenu();
 
         Menu menu = new Menu(nameMenu, usuario);
         int idMenu = daoMenu.create(menu);
 
-        session.setAttribute("menu", menu);
+        System.out.println("id desde el Create" + idMenu);
+
+        request.setAttribute("menuObject", menu);
         request.setAttribute("idMenu", idMenu);
 
         forward("/edit_menu.jsp");

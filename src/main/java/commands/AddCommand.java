@@ -4,6 +4,7 @@ import model.Item;
 import model.Menu;
 import model.Section;
 import model.User;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import persistence.dao.DAOItem;
 import persistence.dao.DAOMenu;
 import persistence.dao.DAOSection;
@@ -20,6 +21,7 @@ public class AddCommand extends FrontCommand {
         HttpSession session = request.getSession(true);
 
         int idMenu = Integer.parseInt(request.getParameter("idMenu"));
+        System.out.println("ID MENU EN EL ADD"+idMenu);
         if (parameter == null) {
             forward("/unknown.jsp");
         } else {
@@ -31,23 +33,26 @@ public class AddCommand extends FrontCommand {
                     daoMenu.update(menu);
                     break;
                 case "itemName":
+                    DAOSection daoSectionItem = new DAOSection();
+                    Section sectionItem = daoSectionItem.read(Integer.parseInt(request.getParameter("idSection")));
                     DAOItem daoItem = new DAOItem();
-                    Item item = new Item(request.getParameter(parameter));
-                    daoItem.create(item);                    
-                    menu.addItem(item);
+                    Item item = new Item(sectionItem, request.getParameter(parameter));
+                    daoItem.create(item);
                     break;
                 case "sectionName":
                     DAOSection daoSection = new DAOSection();
-                    Section section = new Section(request.getParameter(parameter));
+                    Section section = new Section(menu, request.getParameter(parameter));
                     daoSection.create(section);
+                    menu.addSection(section);
                     break;
                 default:
                     forward("/unknown.jsp");
                     break;
             }
 
+            Menu finalMenu = daoMenu.read(idMenu);
             request.setAttribute("idMenu", idMenu);
-            session.setAttribute("menu", menu);
+            request.setAttribute("menuObject", finalMenu);
 
             forward("/edit_menu.jsp");
         }

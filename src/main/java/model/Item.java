@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,13 +62,25 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "id_section"),
             foreignKey = @ForeignKey(name = "fk_ItemAndSection_to_item"),
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndSection_to_section"))
-    private Set<Section> sections;
+    private Set<Section> sections = new HashSet<Section>();
     
     @ManyToMany(mappedBy="items",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Menu> menus;  
+    private Set<Menu> menus;
 
     public Item(String parameter) {
     }
-    
-    
+
+    public Item(Section section, String parameter) {
+        this.name = parameter;
+        this.sections.add(section);
+    }
+
+    public Item() {
+
+    }
+
+
+    public String getName() {
+        return this.name;
+    }
 }

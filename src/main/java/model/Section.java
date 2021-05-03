@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,9 +38,24 @@ public class Section {
     
     
 
-    public Section(String parameter) {
+    public Section(Menu menu, String parameter) {
+        this.name = parameter;
+        this.menu = menu;
     }
-    
-    
-    
+
+    public Section() {
+
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 }
