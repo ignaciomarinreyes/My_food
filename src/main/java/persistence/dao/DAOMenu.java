@@ -37,4 +37,22 @@ public class DAOMenu extends DAOBase<Menu>{
         }
         return menus;
     }
+    
+    @Transactional
+    public List<Menu> findByUserAndName(int idUser, String name) {
+        List<Menu> menus = null;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Query query = session.createNativeQuery("SELECT * FROM menu WHERE name LIKE '%" + name + "%' AND id_user = " + idUser, Menu.class);          
+            menus = query.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return menus;
+    }
 }

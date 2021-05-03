@@ -28,7 +28,7 @@
             <div class="col">
                 <form action="FrontServlet" method="GET">
                     <input type="text" class="form-control" placeholder="Search..." name="search">
-                    <input type="hidden" name="command" value="SearchCommand">
+                    <input type="hidden" name="command" value="SearchMenuCommand">
                 </form>
             </div>
         </div>
