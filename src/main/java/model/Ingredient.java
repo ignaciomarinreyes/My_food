@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,9 +32,15 @@ public class Ingredient {
     private String name;
     
     @ManyToMany(mappedBy="ingredients",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Item> items;  
+    private Set<Item> items = new HashSet<Item>();
+
+    public Ingredient(Item itemIngredient, String parameter) {
+        this.name = parameter;
+        this.items.add(itemIngredient);
+    }
 
     public Ingredient() {
+
     }
 
     public String getName() {

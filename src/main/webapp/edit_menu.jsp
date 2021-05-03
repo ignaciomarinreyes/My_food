@@ -3,7 +3,8 @@
 <%@ page import="model.Item" %>
 <%@ page import="model.Section" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Set" %><%--
+<%@ page import="java.util.Set" %>
+<%@ page import="model.Ingredient" %><%--
   Created by IntelliJ IDEA.
   User: Luicko
   Date: 27/04/2021
@@ -20,25 +21,27 @@
 
     Set<Item> items = menu.getItems();
     Set<Section> sections = menu.getSections();
-    System.out.println("Menu en el edit" +menu);
-    System.out.println("Items en el edit"+items);
-    System.out.println("id en el edit" + idMenu);
-    System.out.println("seccion en el edit"+sections);
+
 
 %>
 
 <body>
+
+<div class="row">
+    <div class="col">
+        <h5> <%= menu.getName() %></h5>
+    </div>
+</div>
     <%
         if (sections != null){
-            System.out.println("ENTRO");
         Iterator<Section> iterator = sections.iterator();
         while (iterator.hasNext()){
             Section next = iterator.next();
     %>
 <div class="row">
 
-    <div class="col-4">
-        <span class="badge bg-info text-dark"><%= next.getName() %></span>
+    <div class="col-1">
+        <span class="badge bg-secondary"><%= next.getName() %></span>
     </div>
 </div>
 <%
@@ -49,11 +52,42 @@
         Item item = itemIterator.next();
 %>
 <div class="row">
-    <div class="col-2">
+    <div class="col-1">
     </div>
-    <div class="col-4">
+    <div class="col-3">
 
-        <span class="badge bg-info text-dark"><%= item.getName() %></span>
+        <span><%= item.getName() %> - - - - - - <%= item.getPrice() %>€</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+        <%
+            Set<Ingredient> ingredients = item.getIngredients();
+            String result = "";
+            for (Ingredient i:
+                 ingredients) {
+                result += " "+ i.getName()+",";
+            }
+        %>
+        <span><%= result %></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-2">
+        <form action="FrontServlet" method="POST">
+            <label for="ingredientNameItem" class="form-label">Ingredient: </label>
+            <input type="text" class="form-control" name="ingredientName" id="ingredientNameItem">
+            <input type="hidden" name="command" value="AddCommand">
+            <input type="hidden" name="idMenu" value="<%= idMenu %>">
+            <input type="hidden" name="idItem" value="<%= item.getId() %>">
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
     </div>
 </div>
 <% }
@@ -67,8 +101,8 @@
                 <label for="itemNameNew" class="form-label">Item: </label>
                 <input type="text" class="form-control" name="itemName" id="itemNameNew">
                 <input type="hidden" name="command" value="AddCommand">
+                <input type="number" class="form-control" name="itemPrice" value="0">
                 <input type="hidden" name="idMenu" value="<%= idMenu %>">
-                <% System.out.println("ID ANTES DE MANDAR" + next.getId()); %>
                 <input type="hidden" name="idSection" value="<%= next.getId() %>">
 
                 <button type="submit" class="btn btn-primary">Add</button>

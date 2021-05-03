@@ -83,4 +83,24 @@ public class Item {
     public String getName() {
         return this.name;
     }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

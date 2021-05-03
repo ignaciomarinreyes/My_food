@@ -1,10 +1,8 @@
 package commands;
 
-import model.Item;
-import model.Menu;
-import model.Section;
-import model.User;
+import model.*;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
+import persistence.dao.DAOIngredient;
 import persistence.dao.DAOItem;
 import persistence.dao.DAOMenu;
 import persistence.dao.DAOSection;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 public class AddCommand extends FrontCommand {
 
-    String[] stringValues = {"menuName", "itemName", "sectionName"};
+    String[] stringValues = {"menuName", "itemName", "sectionName", "ingredientName"};
 
     @Override
     public void process() {
@@ -21,7 +19,6 @@ public class AddCommand extends FrontCommand {
         HttpSession session = request.getSession(true);
 
         int idMenu = Integer.parseInt(request.getParameter("idMenu"));
-        System.out.println("ID MENU EN EL ADD"+idMenu);
         if (parameter == null) {
             forward("/unknown.jsp");
         } else {
@@ -37,7 +34,20 @@ public class AddCommand extends FrontCommand {
                     Section sectionItem = daoSectionItem.read(Integer.parseInt(request.getParameter("idSection")));
                     DAOItem daoItem = new DAOItem();
                     Item item = new Item(sectionItem, request.getParameter(parameter));
+                    double price = Double.parseDouble(request.getParameter("itemPrice"));
+                    if (price != 0) {
+                        item.setPrice(price);
+                    }
                     daoItem.create(item);
+                    break;
+                case "ingredientName":
+                    DAOItem daoItemIngredient = new DAOItem();
+                    Item itemIngredient = daoItemIngredient.read(Integer.parseInt(request.getParameter("idItem")));
+                    DAOIngredient daoIngredient = new DAOIngredient();
+                    Ingredient ingredient = new Ingredient(itemIngredient, request.getParameter(parameter));
+                    daoIngredient.create(ingredient);
+                    itemIngredient.addIngredient(ingredient);
+                    daoItemIngredient.update(itemIngredient);
                     break;
                 case "sectionName":
                     DAOSection daoSection = new DAOSection();

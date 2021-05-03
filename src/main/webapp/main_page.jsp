@@ -69,7 +69,7 @@
                             <div class="row">
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="EditMenuCommand">
-                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
+                                    <input type="hidden" name="idMenu" value="<%= menu.getId() %>">
                                     <button type="submit" class="btn btn-outline-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
@@ -80,7 +80,7 @@
                                 </form>
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="PreviewCommand">
-                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
+                                    <input type="hidden" name="idMenu" value="<%= menu.getId() %>">
                                     <button type="submit" class="btn btn-outline-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
