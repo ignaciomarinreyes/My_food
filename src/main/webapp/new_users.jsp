@@ -79,7 +79,7 @@
     <label for="userName" class="form-label">Full Name</label>
     <input type="text" class="form-control" id="userName" name="userName" placeholder="Full Name...">
     <input type="hidden" name="command" value="RegisterUserCommand">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
+    <button class="btn btn-lg btn-primary btn-block" style="margin-top: 8px;" type="submit">Sign Up!</button>
 
 </form>
 

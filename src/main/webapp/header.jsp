@@ -19,6 +19,7 @@
             background-color: #f8f9fa!important;
         }
     </style>
+
 </head>
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
