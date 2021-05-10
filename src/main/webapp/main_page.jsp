@@ -91,10 +91,8 @@
                                         </svg>
                                     </button>
                                 </form>
-                                <form action="FrontServlet" method="GET" style="width: 43px">
-                                    <input type="hidden" name="command" value="DeleteMenuCommand">
-                                    <input type="hidden" name="id" value="<%= menu.getId() %>">
-                                    <button type="button" class="btn btn-outline-secondary" id="deleteToastBtn">
+                                <form style="width: 43px">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="clickDeleteFunction(<%= menu.getId() %>)" id="deleteToastBtn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                          fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
@@ -119,15 +117,15 @@
 
     <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
         <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
             <div class="toast-body">
                 Are you sure you want to delete this menu?
                 <div class="mt-2 pt-2 border-top">
-                    <button type="button" class="btn btn-primary btn-sm">Delete</button>
-                    <!--este vladi es un submit -->
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+                    <form action="FrontServlet" method="post">
+                        <input type="hidden" name="command" value="DeleteMenuCommand">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <input type="hidden" id="hiddenConfirm" name="id" value="">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -135,10 +133,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
     <script>
-        document.getElementById("deleteToastBtn").onclick = function() {
+        function clickDeleteFunction(id) {
             var myAlert =document.getElementById('deleteToast');//select id of toast
             var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
             bsAlert.show();//show it
+            document.getElementById('hiddenConfirm').value = id;
         };
     </script>
 </main>
