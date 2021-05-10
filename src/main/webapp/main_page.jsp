@@ -94,18 +94,14 @@
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="DeleteMenuCommand">
                                     <input type="hidden" name="id" value="<%= menu.getId() %>">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                            id="deleteToastBtn"></button>
+                                    <button type="button" class="btn btn-outline-secondary" id="deleteToastBtn"></button>
                                     <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
-                                        <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive"
-                                             aria-atomic="true">
+                                        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                                             <div class="toast-body">
-                                                Are you sure about that? *Inset Jhon Cenna*
+                                                Are you sure about that ?
                                                 <div class="mt-2 pt-2 border-top">
-                                                    <button type="button" class="btn btn-primary btn-sm">YES!</button>
-                                                    <button type="button" class="btn btn-secondary btn-sm"
-                                                            data-bs-dismiss="toast">Oh shit, no wait
-                                                    </button>
+                                                    <button type="button" class="btn btn-primary btn-sm">YES</button>
+                                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Oh no, shit, wait!</button>
                                                 </div>
                                             </div>
                                         </div>
