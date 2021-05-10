@@ -94,7 +94,7 @@
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="DeleteMenuCommand">
                                     <input type="hidden" name="id" value="<%= menu.getId() %>">
-                                    <button type="button" class="btn btn-outline-secondary" id="WAIT FOR IT">
+                                    <button type="button" class="btn btn-outline-secondary" id="deleteToastBtn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                          fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
@@ -115,18 +115,20 @@
 
         </div>
     </div>
-    <button type="button" class="btn btn-primary" id="deleteToastBtn">Show live toast</button>
+    <!--<button type="button" class="btn btn-primary" id="vladi">Show live toast</button>-->
 
     <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
-        <div id="deleteToas" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                Hello, world! This is a toast message.
+                Are you sure you want to delete this menu?
+                <div class="mt-2 pt-2 border-top">
+                    <button type="button" class="btn btn-primary btn-sm">Delete</button>
+                    <!--este vladi es un submit -->
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
@@ -134,7 +136,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
     <script>
         document.getElementById("deleteToastBtn").onclick = function() {
-            var myAlert =document.getElementById('deleteToas');//select id of toast
+            var myAlert =document.getElementById('deleteToast');//select id of toast
             var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
             bsAlert.show();//show it
         };
