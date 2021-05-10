@@ -124,36 +124,7 @@
             </form>
         </div>
     </div>
-<div class="row">
-    <div class="col-2">
 
-    </div>
-    <div class="col-4">
-        <form action="FrontServlet" method="POST">
-            <label for="itemName" class="form-label">Item: </label>
-            <input type="text" class="form-control" name="itemName" id="itemName" value="<%= "hola" %>">
-            <input type="hidden" name="command" value="AddCommand">
-            <input type="hidden" name="idMenu" value="<%= idMenu %>">
-
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
-</div>
-<div class="row">
-    <div class="col-2">
-
-    </div>
-    <div class="col-2">
-        <form action="FrontServlet" method="POST">
-            <label for="ingredientName" class="form-label">Ingredient: </label>
-            <input type="text" class="form-control" name="ingredientName" id="ingredientName" value="<%= "hola" %>">
-            <input type="hidden" name="command" value="AddCommand">
-            <input type="hidden" name="idMenu" value="<%= idMenu %>">
-
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
-</div>
 </body>
 
 <jsp:include page="footer.jsp"></jsp:include>

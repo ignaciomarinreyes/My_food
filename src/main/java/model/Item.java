@@ -40,7 +40,7 @@ public class Item {
     @Column(name = "price", nullable = false)
     private double price;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "ItemAndAllergen", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_allergen"),
@@ -48,7 +48,7 @@ public class Item {
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndAllergen_to_allergen"))
     private Set<Allergen> allergens;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "ItemAndIngredient", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredient"),
@@ -56,7 +56,7 @@ public class Item {
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndIngredient_to_ingredient"))
     private Set<Ingredient> ingredients;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "ItemAndSection", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_section"),

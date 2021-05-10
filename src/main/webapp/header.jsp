@@ -23,10 +23,14 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">My Food</a>
-
-            <form class="d-flex">
-                <input type="hidden" value="LogOutCommand" name="command">
-                <button class="btn btn-outline-danger" type="submit">Exit</button>
-            </form>
+        <form action="FrontServlet" class="d-flex" method="GET">
+            <input type="hidden" name="search" value="">
+            <input type="hidden" name="command" value="SearchMenuCommand">
+            <button class="btn btn-outline-success" type="submit">Home</button>
+        </form>
+        <form class="d-flex">
+            <input type="hidden" value="LogOutCommand" name="command">
+            <button class="btn btn-outline-danger" type="submit">Exit</button>
+        </form>
     </div>
 </nav>

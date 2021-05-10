@@ -68,8 +68,11 @@
             <input type="hidden" name="command" value="LoginCommand">
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
 
+            <div class="alert alert-info" role="alert" style="margin-top: 4px;">
+                New here? <a href="new_users.jsp" class="alert-link">SIGN UP!</a>.
+            </div>
+        </form>
 
     </body>
 </html>
