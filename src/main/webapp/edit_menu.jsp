@@ -29,15 +29,16 @@
 
 <div class="row">
     <div class="col">
-        <h5> <%= menu.getName() %></h5>
+        <h5><%= menu.getName() %>
+        </h5>
     </div>
 </div>
-    <%
-        if (sections != null){
+<%
+    if (sections != null) {
         Iterator<Section> iterator = sections.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Section next = iterator.next();
-    %>
+%>
 <div class="row">
 
     <div class="col-1">
@@ -46,10 +47,10 @@
 </div>
 <%
     Set sectionItems = next.getItems();
-    if (sectionItems != null){
-    Iterator<Item> itemIterator = sectionItems.iterator();
-    while (itemIterator.hasNext()){
-        Item item = itemIterator.next();
+    if (sectionItems != null) {
+        Iterator<Item> itemIterator = sectionItems.iterator();
+        while (itemIterator.hasNext()) {
+            Item item = itemIterator.next();
 %>
 <div class="row">
     <div class="col-1">
@@ -66,9 +67,9 @@
         <%
             Set<Ingredient> ingredients = item.getIngredients();
             String result = "";
-            for (Ingredient i:
-                 ingredients) {
-                result += " "+ i.getName()+",";
+            for (Ingredient i :
+                    ingredients) {
+                result += " " + i.getName() + ",";
             }
         %>
         <span><%= result %></span>
@@ -91,41 +92,119 @@
     </div>
 </div>
 <% }
-    }%>
-    <div class="row">
-        <div class="col-2">
+}%>
+<div class="row">
+    <div class="col-2">
 
-        </div>
-        <div class="col-4">
-            <form action="FrontServlet" method="POST">
-                <label for="itemNameNew" class="form-label">Item: </label>
-                <input type="text" class="form-control" name="itemName" id="itemNameNew">
-                <input type="hidden" name="command" value="AddCommand">
-                <input type="number" class="form-control" name="itemPrice" value="0">
-                <input type="hidden" name="idMenu" value="<%= idMenu %>">
-                <input type="hidden" name="idSection" value="<%= next.getId() %>">
-
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-        </div>
     </div>
+    <div class="col-4">
+        <form action="FrontServlet" method="POST">
+            <label for="itemNameNew" class="form-label">Item: </label>
+            <input type="text" class="form-control" name="itemName" id="itemNameNew">
+            <input type="hidden" name="command" value="AddCommand">
+            <input type="number" class="form-control" name="itemPrice" value="0">
+            <input type="hidden" name="idMenu" value="<%= idMenu %>">
+            <input type="hidden" name="idSection" value="<%= next.getId() %>">
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
 <% }
-    }
+}
 %>
-    <div class="row">
-        <div class="col-4">
-            <form action="FrontServlet" method="POST">
-                <label for="sectionName" class="col-form-label">Section: </label>
-                <input type="text" class="form-control" name="sectionName" id="sectionName" value="">
-                <input type="hidden" name="command" value="AddCommand">
-                <input type="hidden" name="idMenu" value="<%= idMenu %>">
+<div class="row">
+    <div class="col-4">
+        <form action="FrontServlet" method="POST">
+            <label for="sectionName" class="col-form-label">Section: </label>
+            <input type="text" class="form-control" name="sectionName" id="sectionName" value="">
+            <input type="hidden" name="command" value="AddCommand">
+            <input type="hidden" name="idMenu" value="<%= idMenu %>">
 
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <div class="card  text-center">
+            <div class="card-header">
+                <%= menu.getName() %>
+            </div>
+            <%
+                if (sections != null) {
+                    Iterator<Section> iterator = sections.iterator();
+                    while (iterator.hasNext()) {
+                        Section next = iterator.next();
+            %>
+            <div class="card-body">
+                <h4 class="badge bg-secondary card-title">
+                    <%= next.getName() %>
+                </h4>
+            </div>
+            <%
+                Set sectionItems = next.getItems();
+                if (sectionItems != null) {%>
+            <ul class="list-group list-group-flush">
+                <%
+                    Iterator<Item> itemIterator = sectionItems.iterator();
+                    while (itemIterator.hasNext()) {
+                        Item item = itemIterator.next();
+                %>
+                <li class="list-group-item"><%= item.getName() %> - - - - - - <%= item.getPrice() %>€</li>
+
+                <%
+                    Set<Ingredient> ingredients = item.getIngredients();
+                    String result = "";
+                    for (Ingredient i :
+                            ingredients) {
+                        result += " " + i.getName() + ",";
+                    }
+                %>
+                <li class="list-group-item">
+                    Ingredients: <%= result %>
+                </li>
+            </ul>
+            <%
+                            }
+                        }
+                    }
+                }
+            %>
         </div>
     </div>
-
+    <div class="col"></div>
+</div>
 </body>
+
+<!-- <ul class="list-group list-group-flush">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+
+                <p class="card-text"> </p>
+<div class="row">
+    <div class="card text-center">
+        <div class="card-header">
+            MENU TITLE
+        </div>
+        <div class="card-body">
+            <h4 class="badge bg-secondary card-title">
+                ONE SECTION
+            </h4>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <p class="card-text">INGREDIENTES</p>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+        </ul>
+
+    </div>
+</div>
+</ul>-->
 
 <jsp:include page="footer.jsp"></jsp:include>
 </html>
