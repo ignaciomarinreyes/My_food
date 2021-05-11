@@ -27,9 +27,16 @@
 <body>
 <div class="row" style="margin-top: 1rem;">
     <div class="col"></div>
-    <div class="col-4">
+    <div class="col-4 text-center">
         <label for="share" class="col-sm-3 col-form-label">Share: </label>
         <input type="text" readonly class="form-control" id="share" value="<%= sharedLink %>">
+        <br>
+        <button class="btn btn-primary">
+            Generate QR
+        </button>
+        <button class="btn btn-outline-warning" onclick="copyFunction()" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
+            Copy
+        </button>
     </div>
     <div class="col"></div>
 </div>
@@ -90,5 +97,19 @@
     <div class="col"></div>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    function copyFunction() {
+        var copyText = document.getElementById("share");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+</script>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>
