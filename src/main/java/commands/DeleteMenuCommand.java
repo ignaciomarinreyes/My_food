@@ -19,7 +19,6 @@ public class DeleteMenuCommand extends FrontCommand{
     @Override
     public void process() {
         int idMenu = Integer.parseInt(request.getParameter("id"));
-        System.out.println(idMenu);
         DAOMenu daoMenu = new DAOMenu();
         daoMenu.remove(idMenu);
         List<Menu> ListMenuAll = daoMenu.findByUser(((User) request.getSession().getAttribute("user")).getId());

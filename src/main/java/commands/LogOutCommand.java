@@ -9,6 +9,6 @@ public class LogOutCommand extends FrontCommand{
 
         session.setAttribute("user", null);
 
-        forward("index.jsp");
+        forward("/index.jsp");
     }
 }

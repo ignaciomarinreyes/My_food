@@ -29,7 +29,7 @@
             <input type="hidden" name="command" value="SearchMenuCommand">
             <button class="btn btn-outline-success" type="submit">Home</button>
         </form>
-        <form class="d-flex">
+        <form action="FrontServlet" method="POST" class="d-flex">
             <input type="hidden" value="LogOutCommand" name="command">
             <button class="btn btn-outline-danger" type="submit">Exit</button>
         </form>
