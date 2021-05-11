@@ -19,7 +19,7 @@
 %>
 
 <body>
-<main class="flex-shrink-0">
+<main class="flex-shrink-0" style="margin-top: 3rem;">
     <div class="container">
         <div class="row">
             <div class="col-2">
@@ -82,7 +82,7 @@
                                 <form action="FrontServlet" method="GET" style="width: 43px">
                                     <input type="hidden" name="command" value="PreviewCommand">
                                     <input type="hidden" name="idMenu" value="<%= menu.getId() %>">
-                                    <button type="submit" class="btn btn-outline-secondary">
+                                    <button type="submit" class="btn btn-outline-info">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
                                              class="bi bi-eye" viewBox="0 0 16 16">
@@ -92,7 +92,7 @@
                                     </button>
                                 </form>
                                 <form style="width: 43px">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="clickDeleteFunction(<%= menu.getId() %>)" id="deleteToastBtn">
+                                    <button type="button" class="btn btn-outline-danger" onclick="clickDeleteFunction(<%= menu.getId() %>)" id="deleteToastBtn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                          fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
@@ -113,7 +113,6 @@
 
         </div>
     </div>
-    <!--<button type="button" class="btn btn-primary" id="vladi">Show live toast</button>-->
 
     <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
         <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
