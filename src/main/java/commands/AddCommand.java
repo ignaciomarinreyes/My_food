@@ -1,5 +1,13 @@
 package commands;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.*;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import persistence.dao.DAOIngredient;
@@ -8,6 +16,9 @@ import persistence.dao.DAOMenu;
 import persistence.dao.DAOSection;
 
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class AddCommand extends FrontCommand {
 
@@ -17,7 +28,8 @@ public class AddCommand extends FrontCommand {
     public void process() {
         String parameter = recoverParameter();
         HttpSession session = request.getSession(true);
-
+        System.out.println("ENTRA");
+        System.out.println(parameter);
         int idMenu = Integer.parseInt(request.getParameter("idMenu"));
         if (parameter == null) {
             forward("/unknown.jsp");
@@ -55,6 +67,9 @@ public class AddCommand extends FrontCommand {
                     daoSection.create(section);
                     menu.addSection(section);
                     break;
+                case "image":
+
+
                 default:
                     forward("/unknown.jsp");
                     break;
@@ -70,8 +85,12 @@ public class AddCommand extends FrontCommand {
 
     private String recoverParameter() {
         for (int i = 0; i < stringValues.length; i++) {
-            if (request.getParameter(stringValues[i]) != null) return stringValues[i];
+            if (request.getParameter(stringValues[i]) != null) {
+                return stringValues[i];
+            }
         }
         return null;
     }
+
+
 }

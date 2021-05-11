@@ -1,12 +1,22 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package commands;
 
 import model.Menu;
 import persistence.dao.DAOMenu;
 
-public class EditMenuCommand extends FrontCommand{
+/**
+ *
+ * @author ignacio
+ */
+public class UploadImageEditMenuCommand extends FrontCommand{
+
     @Override
     public void process() {
-        int idMenu = Integer.parseInt(request.getParameter("idMenu"));
+        int idMenu = (Integer) request.getAttribute("idMenu");
         DAOMenu daoMenu = new DAOMenu();
         Menu menu = daoMenu.read(idMenu);
         
@@ -15,4 +25,5 @@ public class EditMenuCommand extends FrontCommand{
 
         forward("/edit_menu.jsp");
     }
+    
 }

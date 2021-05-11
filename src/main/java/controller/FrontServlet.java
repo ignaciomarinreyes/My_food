@@ -127,7 +127,12 @@ public class FrontServlet extends HttpServlet {
 
     private Class getCommandClass(HttpServletRequest request) {
         Class result;
-        final String command ="commands."+(String)request.getParameter("command");
+        String command = "";
+        if(request.getParameter("command") == null){
+            command ="commands."+(String)request.getAttribute("command");
+        } else {    
+            command ="commands."+(String)request.getParameter("command");
+        }
         try {
             result = Class.forName(command);
         } catch (ClassNotFoundException ex) {
