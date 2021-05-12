@@ -54,7 +54,27 @@
                         Item item = itemIterator.next();
                 %>
                 <li class="list-group-item"><%= item.getName() %> - - - - - - <%= item.getPrice() %>€</li>
-
+                <%
+                    if(item.getImage() != null){
+                %>
+                    <img src="<%= item.getImage()%>" height="450px" width="450px">
+                <%
+                    } else {
+                %>
+                <div class="row">
+                    <div class="col-4">
+                        <form action="UploadServlet" method="post" enctype="multipart/form-data" >
+                            <input type='file' name='image' accept="image/*" />
+                            <input type="hidden" name="command" value="UploadImageEditMenuCommand">
+                            <input type="hidden" name="idMenu" value="<%= menu.getId()%>">
+                            <input type="hidden" name="idItem" value="<%= item.getId()%>">
+                            <input type = "submit" value = "Subir imagen" />
+                        </form>     
+                    </div>
+                </div>
+                <%
+                    }
+                %>
                 <%
                     Set<Ingredient> ingredients = item.getIngredients();
                     String result = "";

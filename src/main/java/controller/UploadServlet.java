@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -58,32 +59,36 @@ public class UploadServlet extends HttpServlet {
         upload.setFileSizeMax(MAX_FILE_SIZE);
         upload.setSizeMax(MAX_REQUEST_SIZE);
         upload.setHeaderEncoding("UTF-8");
-        String uploadPath = request.getServletContext().getRealPath("./") + File.separator + UPLOAD_DIRECTORY;
+        String uploadPath = "";
+        String dirUser = ((User) request.getSession().getAttribute("user")).getId() + "_" + ((User) request.getSession().getAttribute("user")).getNickName();
+        uploadPath = request.getServletContext().getRealPath("./") + File.separator + UPLOAD_DIRECTORY + File.separator + dirUser;
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+            uploadDir.mkdirs();
         }
-        String filePath = "";
+        String pathImageDB = "";
         try {
             List<FileItem> formItems = upload.parseRequest(request);
             if (formItems != null && formItems.size() > 0) {
                 for (FileItem item : formItems) {
                     if (!item.isFormField()) {
                         String fileName = new File(item.getName()).getName();
-                        filePath = uploadPath + File.separator + fileName;
+                        String filePath = uploadPath + File.separator + fileName;
+                        pathImageDB = UPLOAD_DIRECTORY + File.separator + dirUser + File.separator + fileName;
                         File storeFile = new File(filePath);
                         item.write(storeFile);
                         request.setAttribute("mensaje", "¡Archivo cargado correctamente!");
                     } else {
                         if (item.getFieldName().equals("command")) request.setAttribute("command", item.getString());
                         if (item.getFieldName().equals("idMenu")) request.setAttribute("idMenu", item.getString());
+                        if (item.getFieldName().equals("idItem")) request.setAttribute("idItem", item.getString());                      
                     }
                 }
             }
         } catch (Exception ex) {
             request.setAttribute("mensaje", "Mensaje de error:" + ex.getMessage());
         }
-        request.setAttribute("pathImage", filePath);
+        request.setAttribute("pathImage", pathImageDB);
         request.getServletContext().getRequestDispatcher("/FrontServlet").forward(request, response);
     }
 

@@ -5,25 +5,35 @@
  */
 package commands;
 
+import model.Item;
 import model.Menu;
+import persistence.dao.DAOItem;
 import persistence.dao.DAOMenu;
 
 /**
  *
  * @author ignacio
  */
-public class UploadImageEditMenuCommand extends FrontCommand{
+public class UploadImageEditMenuCommand extends FrontCommand {
 
     @Override
     public void process() {
-        int idMenu = (Integer) request.getAttribute("idMenu");
-        DAOMenu daoMenu = new DAOMenu();
-        Menu menu = daoMenu.read(idMenu);
-        
-        request.setAttribute("menuObject", menu);
-        request.setAttribute("idMenu", idMenu);
+        try {
+            DAOItem daoItem = new DAOItem();
+            Item item = daoItem.read(new Integer((String)request.getAttribute("idItem")));
+            item.setImage((String) request.getAttribute("pathImage"));
+            daoItem.update(item);
+            DAOMenu daoMenu = new DAOMenu();
+            int idMenu = new Integer((String) request.getAttribute("idMenu"));
+            Menu menu = daoMenu.read(idMenu);
+            request.setAttribute("menuObject", menu);
+            request.setAttribute("idMenu", idMenu);
 
-        forward("/edit_menu.jsp");
+            forward("/edit_menu.jsp");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
-    
+
 }

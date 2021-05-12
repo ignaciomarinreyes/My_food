@@ -38,8 +38,8 @@ public class Section {
     
     
 
-    public Section(Menu menu, String parameter) {
-        this.name = parameter;
+    public Section(Menu menu, String name) {
+        this.name = name;
         this.menu = menu;
     }
 

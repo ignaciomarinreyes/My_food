@@ -26,60 +26,58 @@ public class AddCommand extends FrontCommand {
 
     @Override
     public void process() {
-        String parameter = recoverParameter();
-        HttpSession session = request.getSession(true);
-        System.out.println("ENTRA");
-        System.out.println(parameter);
-        int idMenu = Integer.parseInt(request.getParameter("idMenu"));
-        if (parameter == null) {
-            forward("/unknown.jsp");
-        } else {
-            DAOMenu daoMenu = new DAOMenu();
-            Menu menu = daoMenu.read(idMenu);
-            switch (parameter) {
-                case "menuName":
-                    menu.setName(request.getParameter(parameter));
-                    daoMenu.update(menu);
-                    break;
-                case "itemName":
-                    DAOSection daoSectionItem = new DAOSection();
-                    Section sectionItem = daoSectionItem.read(Integer.parseInt(request.getParameter("idSection")));
-                    DAOItem daoItem = new DAOItem();
-                    Item item = new Item(sectionItem, request.getParameter(parameter));
-                    double price = Double.parseDouble(request.getParameter("itemPrice"));
-                    if (price != 0) {
-                        item.setPrice(price);
-                    }
-                    daoItem.create(item);
-                    break;
-                case "ingredientName":
-                    DAOItem daoItemIngredient = new DAOItem();
-                    Item itemIngredient = daoItemIngredient.read(Integer.parseInt(request.getParameter("idItem")));
-                    DAOIngredient daoIngredient = new DAOIngredient();
-                    Ingredient ingredient = new Ingredient(itemIngredient, request.getParameter(parameter));
-                    daoIngredient.create(ingredient);
-                    itemIngredient.addIngredient(ingredient);
-                    daoItemIngredient.update(itemIngredient);
-                    break;
-                case "sectionName":
-                    DAOSection daoSection = new DAOSection();
-                    Section section = new Section(menu, request.getParameter(parameter));
-                    daoSection.create(section);
-                    menu.addSection(section);
-                    break;
-                case "image":
-
-
-                default:
-                    forward("/unknown.jsp");
-                    break;
+        try {
+            String parameter = recoverParameter();
+            int idMenu = Integer.parseInt(request.getParameter("idMenu"));
+            if (parameter == null) {
+                forward("/unknown.jsp");
+            } else {
+                DAOMenu daoMenu = new DAOMenu();
+                Menu menu = daoMenu.read(idMenu);
+                switch (parameter) {
+                    case "menuName":
+                        menu.setName(request.getParameter(parameter));
+                        daoMenu.update(menu);
+                        break;
+                    case "itemName":
+                        DAOSection daoSectionItem = new DAOSection();
+                        Section sectionItem = daoSectionItem.read(Integer.parseInt(request.getParameter("idSection")));
+                        DAOItem daoItem = new DAOItem();
+                        Item item = new Item(sectionItem, request.getParameter(parameter));
+                        double price = Double.parseDouble(request.getParameter("itemPrice"));
+                        if (price != 0) {
+                            item.setPrice(price);
+                        }
+                        menu.addItem(item);
+                        daoMenu.update(menu);
+                        daoItem.create(item);
+                        break;
+                    case "ingredientName":
+                        DAOItem daoItemIngredient = new DAOItem();
+                        Item itemIngredient = daoItemIngredient.read(Integer.parseInt(request.getParameter("idItem")));
+                        DAOIngredient daoIngredient = new DAOIngredient();
+                        Ingredient ingredient = new Ingredient(itemIngredient, request.getParameter(parameter));
+                        daoIngredient.create(ingredient);
+                        itemIngredient.addIngredient(ingredient);
+                        daoItemIngredient.update(itemIngredient);
+                        break;
+                    case "sectionName":
+                        DAOSection daoSection = new DAOSection();
+                        Section section = new Section(menu, request.getParameter(parameter));
+                        daoSection.create(section);
+                        menu.addSection(section);
+                        break;
+                    default:
+                        forward("/unknown.jsp");
+                        break;
+                }
+                Menu finalMenu = daoMenu.read(idMenu);
+                request.setAttribute("idMenu", idMenu);
+                request.setAttribute("menuObject", finalMenu);
+                forward("/edit_menu.jsp");
             }
-
-            Menu finalMenu = daoMenu.read(idMenu);
-            request.setAttribute("idMenu", idMenu);
-            request.setAttribute("menuObject", finalMenu);
-
-            forward("/edit_menu.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -91,6 +89,5 @@ public class AddCommand extends FrontCommand {
         }
         return null;
     }
-
 
 }

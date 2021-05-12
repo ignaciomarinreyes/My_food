@@ -129,6 +129,8 @@ public class FrontServlet extends HttpServlet {
         Class result;
         String command = "";
         if(request.getParameter("command") == null){
+            System.out.println(request.getParameter("command"));
+            System.out.println((String)request.getAttribute("command"));
             command ="commands."+(String)request.getAttribute("command");
         } else {    
             command ="commands."+(String)request.getParameter("command");

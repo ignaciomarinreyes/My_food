@@ -28,7 +28,7 @@ public class Menu {
             inverseJoinColumns = @JoinColumn(name = "id_item"),
             foreignKey = @ForeignKey(name = "fk_MenuAndItem_to_menu"),
             inverseForeignKey = @ForeignKey(name = "fk_MenuAndItem_to_item"))
-    private Set<Item> items;
+    private Set<Item> items = new HashSet<Item>();
     
     @ManyToOne()
     @JoinColumn(nullable = false, name = "id_user", foreignKey = @ForeignKey(name = "fk_menu_to_user"))
@@ -41,7 +41,6 @@ public class Menu {
     public Menu(String name, User u) {
         this.name = name;
         user = u;
-        items = new HashSet<Item>();
     }
 
     public Menu() {
@@ -53,6 +52,7 @@ public class Menu {
     }
 
     public void addItem(Item item) {
+        items.add(item);
     }
 
     public void setName(String name) {

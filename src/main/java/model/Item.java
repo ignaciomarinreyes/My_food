@@ -79,6 +79,9 @@ public class Item {
 
     }
 
+    public Set<Menu> getMenus() {
+        return menus;
+    }
 
     public String getName() {
         return this.name;
