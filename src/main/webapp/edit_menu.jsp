@@ -26,7 +26,7 @@
 %>
 
 <body>
-<div class="row">
+<div class="row" style="margin-top: 2rem;">
     <div class="col"></div>
     <div class="col-6">
         <div class="card  text-center">
@@ -53,8 +53,9 @@
                     while (itemIterator.hasNext()) {
                         Item item = itemIterator.next();
                 %>
-                <li class="list-group-item"><%= item.getName() %> - - - - - - <%= item.getPrice() %>€</li>
-                <%
+                <li class="list-group-item">
+                    <%= item.getName() %> - - - - - - <%= item.getPrice() %>€
+                                    <%
                     if(item.getImage() != null){
                 %>
                     <img src="<%= item.getImage()%>" height="450px" width="450px">
@@ -75,20 +76,20 @@
                 <%
                     }
                 %>
-                <%
-                    Set<Ingredient> ingredients = item.getIngredients();
-                    String result = "";
-                    for (Ingredient i :
-                            ingredients) {
-                        result += " " + i.getName() + ",";
-                    }
-                %>
-                <% if (!result.equals("")) {%>
-                <li class="list-group-item">
+                    
+                    <%
+                        Set<Ingredient> ingredients = item.getIngredients();
+                        String result = "";
+                        for (Ingredient i :
+                                ingredients) {
+                            result += " " + i.getName() + ",";
+                        }
+                    %>
+                    <br>
+                    <% if (!result.equals("")) {%>
                     Ingredients: <%= result %>
-                </li>
-                <% } %>
-                <li class="list-group-item">
+                    <% } %>
+                    <br>
                     <form action="FrontServlet" method="POST">
                         <div class="mb-3 row">
                             <label for="ingredientNameItem1" class="col-sm-3 col-form-label">Add Ingredient: </label>
@@ -110,8 +111,8 @@
                 </li>
 
                 <%
-                        }
-                    } %>
+                    }
+                %>
                 <li class="list-group-item">
                     <form action="FrontServlet" method="POST">
                         <div class="mb-3 row">
@@ -134,9 +135,12 @@
                         </div>
                     </form>
                 </li>
+                <%
+                        }
+                    } %>
+
             </ul>
             <%
-                    }
                 }
             %>
             <div class="card-body">
@@ -157,7 +161,30 @@
 </div>
 </body>
 
-<!-- <ul class="list-group list-group-flush">
+<!--
+<li class="list-group-item">
+                    <form action="FrontServlet" method="POST">
+                        <div class="mb-3 row">
+                            <label for="ingredientNameItem1" class="col-sm-3 col-form-label">Add Ingredient: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="ingredientName" id="ingredientNameItem1">
+                            </div>
+                            <input type="hidden" name="command" value="AddCommand">
+                            <input type="hidden" name="idMenu" value="<% //idMenu %>">
+                            <input type="hidden" name="idItem" value="<% //item.getId() %>">
+
+                            <button type="submit" class="col-sm-1 btn btn-outline-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+
+
+<ul class="list-group list-group-flush">
     <li class="list-group-item">An item</li>
     <li class="list-group-item">A second item</li>
     <li class="list-group-item">A third item</li>
