@@ -20,8 +20,6 @@ public class CreateMenuCommand extends FrontCommand{
         Menu menu = new Menu(nameMenu, usuario);
         int idMenu = daoMenu.create(menu);
 
-        System.out.println("id desde el Create" + idMenu);
-
         request.setAttribute("menuObject", menu);
         request.setAttribute("idMenu", idMenu);
 

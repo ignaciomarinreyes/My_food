@@ -69,17 +69,14 @@
 <form class="form-signin" action="FrontServlet" method="POST">
     <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
     <label for="nickname" class="form-label">Nickname</label>
-    <input type="text" class="form-control" id="nickname" placeholder="Nickname...">
+    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nickname..." required>
     <label for="userPassword" class="form-label">Password</label>
     <input type="password" class="form-control" id="userPassword" name="firstPassword"
-           placeholder="Password...">
-    <label for="userRepeatPassword" class="form-label">Repeat Password</label>
-    <input type="password" class="form-control" id="userRepeatPassword" name="secondPassword"
-           placeholder="Repeat Password...">
+           placeholder="Password..." required>
     <label for="userName" class="form-label">Full Name</label>
-    <input type="text" class="form-control" id="userName" name="userName" placeholder="Full Name...">
+    <input type="text" class="form-control" id="userName" name="fullname" placeholder="Full Name...">
     <input type="hidden" name="command" value="RegisterUserCommand">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
+    <button class="btn btn-lg btn-primary btn-block" style="margin-top: 8px;" type="submit">Sign Up!</button>
 
 </form>
 

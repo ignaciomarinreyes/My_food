@@ -19,8 +19,9 @@
             background-color: #f8f9fa!important;
         }
     </style>
+
 </head>
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">My Food</a>
         <form action="FrontServlet" class="d-flex" method="GET">
