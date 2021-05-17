@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -27,7 +29,7 @@ public class Menu {
             inverseJoinColumns = @JoinColumn(name = "id_item"),
             foreignKey = @ForeignKey(name = "fk_MenuAndItem_to_menu"),
             inverseForeignKey = @ForeignKey(name = "fk_MenuAndItem_to_item"))
-    private Set<Item> items = new HashSet<Item>();
+    private List<Item> items = new ArrayList<Item>();
     
     @ManyToOne()
     @JoinColumn(nullable = false, name = "id_user", foreignKey = @ForeignKey(name = "fk_menu_to_user"))
@@ -35,7 +37,7 @@ public class Menu {
     
     @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Section> sections;
+    private Set<Section> sections = new HashSet<Section>();
 
     public Menu(String name, User u) {
         this.name = name;
@@ -59,7 +61,7 @@ public class Menu {
     }
 
 
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
