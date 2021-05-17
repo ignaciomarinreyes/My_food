@@ -36,7 +36,7 @@ public class Menu {
     
     @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Section> sections;
+    private Set<Section> sections = new HashSet<>();
 
     public Menu(String name, User u) {
         this.name = name;
