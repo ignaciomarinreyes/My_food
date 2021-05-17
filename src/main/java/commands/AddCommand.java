@@ -43,13 +43,16 @@ public class AddCommand extends FrontCommand {
                         DAOSection daoSectionItem = new DAOSection();
                         Section sectionItem = daoSectionItem.read(Integer.parseInt(request.getParameter("idSection")));
                         DAOItem daoItem = new DAOItem();
-                        Item item = new Item(sectionItem, request.getParameter(parameter));
+                        Item item = new Item(request.getParameter(parameter));
+                        item.addSection(sectionItem);
                         double price = Double.parseDouble(request.getParameter("itemPrice"));
                         if (price != 0) {
                             item.setPrice(price);
-                        }
+                        }                      
                         menu.addItem(item);
+                        item.addMenu(menu);
                         daoMenu.update(menu);
+                        daoItem.create(item);
                         break;
                     case "ingredientName":
                         DAOItem daoItemIngredient = new DAOItem();

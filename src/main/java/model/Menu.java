@@ -22,8 +22,7 @@ public class Menu {
     @Column(name = "name", nullable = false)
     private String name;
        
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "MenuAndItem", joinColumns = @JoinColumn(name = "id_menu"),
             inverseJoinColumns = @JoinColumn(name = "id_item"),
             foreignKey = @ForeignKey(name = "fk_MenuAndItem_to_menu"),

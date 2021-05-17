@@ -11,15 +11,15 @@ public class DAOBase<T> implements IDAOBase<T> {
     public int create(T createClase) {
         Transaction transaction = null;
         int result = 0;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             result = (int) session.save(createClase);
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
         }
         return result;
     }
@@ -28,15 +28,15 @@ public class DAOBase<T> implements IDAOBase<T> {
     public T read(int id) {
         T result = null;
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             result = (T) session.get(getEntityClass(), id);
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
         }
         return result;
     }
@@ -44,15 +44,15 @@ public class DAOBase<T> implements IDAOBase<T> {
     @Override
     public void update(T updateClase) {
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(updateClase);
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
         }
     }
 
@@ -60,11 +60,17 @@ public class DAOBase<T> implements IDAOBase<T> {
     public void remove(int id) throws IllegalStateException {
         Transaction transaction = null;
         T removeClase = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        removeClase = (T) session.get(getEntityClass(), id);
-        session.remove(removeClase);
-        transaction.commit();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            removeClase = (T) session.get(getEntityClass(), id);
+            session.remove(removeClase);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     private Class<T> getEntityClass() {

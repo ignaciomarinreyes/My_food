@@ -29,7 +29,7 @@ public class Section {
     @Column(name = "name", nullable = false)
     private String name;
     
-    @ManyToMany(mappedBy="sections",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="sections", fetch = FetchType.EAGER)
     private Set<Item> items; 
     
     @ManyToOne()
