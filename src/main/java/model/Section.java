@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "section")
+@Table(name = "section_")
 public class Section {
 
     @Id

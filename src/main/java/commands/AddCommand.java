@@ -50,7 +50,6 @@ public class AddCommand extends FrontCommand {
                         }
                         menu.addItem(item);
                         daoMenu.update(menu);
-                        daoItem.create(item);
                         break;
                     case "ingredientName":
                         DAOItem daoItemIngredient = new DAOItem();

@@ -15,8 +15,8 @@ import persistence.dao.DAOUser;
 public class Main {
     
     public static void main(String[] args) throws ParseException {
-        //createDataBase();
-        //HibernateUtil.shutdown();
+        createDataBase();
+        HibernateUtil.shutdown();
         //DAOIngredient service = new DAOIngredient();
         //service.create(new Ingredient("hola"));
         
