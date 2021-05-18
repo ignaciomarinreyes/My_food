@@ -37,7 +37,7 @@
         <label for="share" class="col-sm-3 col-form-label">Share: </label>
         <input type="text" readonly class="form-control" id="share" value="<%= sharedLink %>">
         <br>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" onclick="clickShowQR()">
             Generate QR
         </button>
         <button class="btn btn-outline-warning" onclick="copyFunction()" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
@@ -126,6 +126,14 @@
         </div>
     </div>
 </div>
+<div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
+    <div id="qrToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+            <img src="https://qrickit.com/api/qr.php?d=<%= sharedLink %>">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
@@ -147,6 +155,13 @@
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
     }
+</script>
+<script>
+    function clickShowQR() {
+        var myAlert =document.getElementById('qrToast');//select id of toast
+        var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
+        bsAlert.show();//show it
+    };
 </script>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>
