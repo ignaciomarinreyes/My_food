@@ -40,43 +40,46 @@ public class Item {
     @Column(name = "price", nullable = false)
     private double price;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ItemAndAllergen", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_allergen"),
             foreignKey = @ForeignKey(name = "fk_ItemAndAllergen_to_item"),
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndAllergen_to_allergen"))
     private Set<Allergen> allergens;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ItemAndIngredient", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredient"),
             foreignKey = @ForeignKey(name = "fk_ItemAndIngredient_to_item"),
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndIngredient_to_ingredient"))
     private Set<Ingredient> ingredients;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ItemAndSection", joinColumns = @JoinColumn(name = "id_item"),
             inverseJoinColumns = @JoinColumn(name = "id_section"),
             foreignKey = @ForeignKey(name = "fk_ItemAndSection_to_item"),
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndSection_to_section"))
     private Set<Section> sections = new HashSet<Section>();
     
-    @ManyToMany(mappedBy="items",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Menu> menus;
+    @ManyToMany(mappedBy="items", fetch = FetchType.EAGER)
+    private Set<Menu> menus = new HashSet<Menu>();
 
-    public Item(String parameter) {
-    }
 
-    public Item(Section section, String parameter) {
-        this.name = parameter;
-        this.sections.add(section);
+
+    public Item(String name) {
+        this.name = name;
     }
 
     public Item() {
 
+    }
+    
+    public void addMenu(Menu menu){
+        menus.add(menu);
+    }
+    
+    public void addSection(Section section){
+        sections.add(section);
     }
 
     public Set<Menu> getMenus() {

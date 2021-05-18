@@ -23,7 +23,7 @@ public class Allergen {
     @Column(name = "name", nullable = false)
     private String name;
     
-    @ManyToMany(mappedBy="allergens",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="allergens", fetch = FetchType.EAGER)
     private Set<Item> items;  
 
     public Allergen() {

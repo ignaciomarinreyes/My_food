@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page import="model.Menu" %>
 <%@ page import="model.Item" %>
 <%@ page import="model.Section" %>
@@ -20,7 +21,7 @@
 
     String sharedLink = (String) request.getAttribute("sharedLink");
 
-    Set<Item> items = menu.getItems();
+    List<Item> items = menu.getItems();
     Set<Section> sections = menu.getSections();
 
 %>

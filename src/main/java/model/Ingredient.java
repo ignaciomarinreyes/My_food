@@ -31,7 +31,7 @@ public class Ingredient {
     @Column(name = "name", nullable = false)
     private String name;
     
-    @ManyToMany(mappedBy="ingredients",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="ingredients", fetch = FetchType.EAGER)
     private Set<Item> items = new HashSet<Item>();
 
     public Ingredient(Item itemIngredient, String parameter) {

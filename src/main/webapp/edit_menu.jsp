@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page import="model.Menu" %>
 <%@ page import="java.util.HashSet" %>
 <%@ page import="model.Item" %>
@@ -19,7 +20,8 @@
     Menu menu = (Menu) request.getAttribute("menuObject");
     Integer idMenu = (Integer) request.getAttribute("idMenu");
 
-    Set<Item> items = menu.getItems();
+    List<Item> items = menu.getItems();
+
     Set<Section> sections = menu.getSections();
 
 
