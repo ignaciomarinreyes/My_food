@@ -22,7 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class AddCommand extends FrontCommand {
 
-    String[] stringValues = {"menuName", "itemName", "sectionName", "ingredientName"};
+    String[] stringValues = {"allergenName", "menuName", "itemName", "sectionName", "ingredientName"};
 
     @Override
     public void process() {
@@ -68,6 +68,15 @@ public class AddCommand extends FrontCommand {
                         Section section = new Section(menu, request.getParameter(parameter));
                         daoSection.create(section);
                         menu.addSection(section);
+                        break;
+                    case "allergenName":
+                        DAOItem daoItemAllergen = new DAOItem();
+                        Item itemAllergen = daoItemAllergen.read(Integer.parseInt(request.getParameter("idItem")));
+                        DAOAllergen daoAllergen = new DAOAllergen();
+                        Allergen allergen = new Allergen(itemAllergen, request.getParameter(parameter));
+                        daoAllergen.create(allergen);
+                        itemAllergen.addAllergen(allergen);
+                        daoItemAllergen.update(itemAllergen);
                         break;
                     default:
                         forward("/unknown.jsp");
