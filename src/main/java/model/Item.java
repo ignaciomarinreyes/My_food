@@ -106,6 +106,14 @@ public class Item {
         this.ingredients.add(ingredient);
     }
 
+    public Set<Allergen> getAllergens() {
+        return this.allergens;
+    }
+
+    public void addAllergen(Allergen allergen) {
+        this.allergens.add(allergen);
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
