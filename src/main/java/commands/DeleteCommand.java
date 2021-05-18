@@ -1,5 +1,11 @@
 package commands;
 
+import model.Menu;
+import persistence.dao.DAOIngredient;
+import persistence.dao.DAOItem;
+import persistence.dao.DAOMenu;
+import persistence.dao.DAOSection;
+
 public class DeleteCommand extends FrontCommand{
 String[] stringValues = {"itemId", "sectionId", "ingredientId"};
 
