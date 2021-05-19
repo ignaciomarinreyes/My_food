@@ -1,13 +1,7 @@
 package commands;
 
-import model.Ingredient;
-import model.Item;
-import model.Menu;
-import model.Section;
-import persistence.dao.DAOIngredient;
-import persistence.dao.DAOItem;
-import persistence.dao.DAOMenu;
-import persistence.dao.DAOSection;
+import model.*;
+import persistence.dao.*;
 
 public class AddCommand extends FrontCommand {
 

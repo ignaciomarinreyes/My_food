@@ -26,7 +26,13 @@ public class Allergen {
     @ManyToMany(mappedBy="allergens", fetch = FetchType.EAGER)
     private Set<Item> items;  
 
+    public Allergen(Item itemAllergen, String parameter) {
+        this.items.add(itemAllergen);
+        this.name = parameter;
+    }
+
     public Allergen() {
+
     }
 
     public String getName() {
