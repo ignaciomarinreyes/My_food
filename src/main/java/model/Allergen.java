@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class Allergen {
     private String name;
     
     @ManyToMany(mappedBy="allergens", fetch = FetchType.EAGER)
-    private Set<Item> items;  
+    private Set<Item> items = new HashSet<>();
 
     public Allergen(Item itemAllergen, String parameter) {
         this.items.add(itemAllergen);

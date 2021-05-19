@@ -1,11 +1,8 @@
-<%@page import="java.util.List"%>
-<%@ page import="model.Menu" %>
+<%@page import="java.util.List" %>
 <%@ page import="java.util.HashSet" %>
-<%@ page import="model.Item" %>
-<%@ page import="model.Section" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="model.Ingredient" %><%--
+<%@ page import="model.*" %><%--
   Created by IntelliJ IDEA.
   User: Luicko
   Date: 27/04/2021
@@ -27,41 +24,11 @@
 
 %>
 <style>
-    .imageButton{
+    .imageButton {
         border-radius: 15px;
     }
 </style>
 <body>
-
-<form action="FrontServlet" method="POST">
-    <button type="submit" class="col-sm-1 btn btn-outline-danger">
-        <input type="hidden" name="idMenu" value="<%= idMenu %>">
-        <input type="hidden" name="itemId" value="<%= idMenu %>">
-        <input type="hidden" name="command" value="DeleteCommand">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-        </svg>
-        <div class="form-check form-switch">
-
-            <input class="form-check-input" name="peanuts" type="checkbox" id="peanutsCheckbox">
-            <label class="form-check-label" for="peanutsCheckbox">Peanuts</label>
-
-            <input class="form-check-input" name="gluten" type="checkbox" id="glutenCheckbox">
-            <label class="form-check-label" for="glutenCheckbox">Gluten</label>
-
-            <input class="form-check-input" name="egg" type="checkbox" id="eggCheckbox">
-            <label class="form-check-label" for="eggCheckbox">Egg</label>
-
-            <input class="form-check-input" name="dairy" type="checkbox" id="dairyCheckbox">
-            <label class="form-check-label" for="dairyCheckbox">Dairy Products</label>
-
-            <input class="form-check-input" name="mollusks" type="checkbox" id="mollusksCheckbox">
-            <label class="form-check-label" for="mollusksCheckbox">Mollusks</label>
-
-        </div>
-    </button>
-</form>
 
 <div class="row" style="margin-top: 2rem;">
     <div class="col"></div>
@@ -85,9 +52,11 @@
                         <input type="hidden" name="idMenu" value="<%= menu.getId()%>">
                         <input type="hidden" name="sectionId" value="<%= next.getId()%>">
                         <input type="hidden" name="command" value="DeleteCommand">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            <path fill-rule="evenodd"
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                         </svg>
                     </button>
                 </form>
@@ -109,9 +78,11 @@
                             <input type="hidden" name="itemId" value="<%= item.getId()%>">
                             <input type="hidden" name="command" value="DeleteCommand">
                             <input type="hidden" name="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                <path fill-rule="evenodd"
+                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                             </svg>
                         </button>
                     </form>
@@ -119,11 +90,13 @@
                         if (item.getImage() != null) {
                     %>
                     <button class="btn btn-outline-dark" onclick="clickShowImage('<%= item.getId() %>')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-eye" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                         </svg>
-                        <img src="<%= item.getImage()%>" id="<%= item.getId() %>" class="imageButton" height="50px" width="50px">
+                        <img src="<%= item.getImage()%>" id="<%= item.getId() %>" class="imageButton" height="50px"
+                             width="50px">
                     </button>
                     <%
                     } else {
@@ -142,6 +115,79 @@
                         <input type="hidden" name="idItem" value="<%= item.getId()%>">
                         <button type="submit" class="btn btn-outline-success">
                             Upload
+                        </button>
+                    </form>
+                    <form action="FrontServlet" method="POST">
+                        <div class="mb-4 row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="peanutsAllegen" type="checkbox"
+                                       id="peanutsCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("peanutsAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="peanutsCheckbox"><img
+                                        src="IconoAlergenoCacahuete-Peanuts_icon-icons.com_67604.png"></label>
+                            </div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="glutenAllegen" type="checkbox"
+                                       id="glutenCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("glutenAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="glutenCheckbox"><img
+                                        src="IconoAlergenoGluten-Gluten_icon-icons.com_67600.png"></label>
+                            </div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="eggAllegen" type="checkbox" id="eggCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("eggAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="eggCheckbox"><img
+                                        src="IconoAlergenoHuevo-Egg_icon-icons.com_67598.png"></label>
+                            </div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="dairyAllegen" type="checkbox" id="dairyCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("dairyAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="dairyCheckbox"><img
+                                        src="IconoAlergenoLacteos-DairyProducts_icon-icons.com_67597.png"></label>
+                            </div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="mollusksAllegen" type="checkbox"
+                                       id="mollusksCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("mollusksAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="mollusksCheckbox"><img
+                                        src="IconoAlergenoMoluscos-Mollusks_icon-icons.com_67596.png"></label>
+                            </div>
+                            <div class="col-sm-1 form-check form-switch">
+                                <input class="form-check-input" name="fishAllegen" type="checkbox" id="fishCheckbox"
+                                    <% for(Allergen allergen: item.getAllergens()) {if (allergen.getName().equals("fishAllegen")){
+                                        %>
+                                       checked
+                                    <% }} %>>
+                                <label class="form-check-label" for="fishCheckbox"><img
+                                        src="Fish_icon-icons.com_67594.png"></label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="idMenu" value="<%= menu.getId() %>">
+                        <input type="hidden" name="idItem" value="<%= item.getId() %>">
+                        <input type="hidden" name="command" value="AddCommand">
+                        <input type="hidden" name="allergenName" value="">
+                        <button type="submit" class="col-sm-2 btn btn-outline-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                            </svg>
+                            Allergens
                         </button>
                     </form>
                     <%
@@ -173,8 +219,8 @@
 
                             <button type="submit" class="col-sm-1 btn btn-outline-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-plus" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                     class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                 </svg>
                             </button>
                         </div>
@@ -199,8 +245,8 @@
                             </div>
                             <button type="submit" class="col-sm-1 btn btn-outline-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-plus" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                     class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                                 </svg>
                             </button>
                         </div>
@@ -396,7 +442,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <script>
     function clickShowImage(url) {
-        var myAlert =document.getElementById('deleteToast');//select id of toast
+        var myAlert = document.getElementById('deleteToast');//select id of toast
         var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
         bsAlert.show();//show it
         document.getElementById('imageToast').src = document.getElementById(url).src;

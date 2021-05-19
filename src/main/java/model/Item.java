@@ -45,7 +45,7 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "id_allergen"),
             foreignKey = @ForeignKey(name = "fk_ItemAndAllergen_to_item"),
             inverseForeignKey = @ForeignKey(name = "fk_ItemAndAllergen_to_allergen"))
-    private Set<Allergen> allergens;
+    private Set<Allergen> allergens = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ItemAndIngredient", joinColumns = @JoinColumn(name = "id_item"),

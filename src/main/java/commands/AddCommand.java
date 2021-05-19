@@ -3,9 +3,13 @@ package commands;
 import model.*;
 import persistence.dao.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddCommand extends FrontCommand {
 
     String[] stringValues = {"allergenName", "menuName", "itemName", "sectionName", "ingredientName"};
+    String[] allergenList = { "peanutsAllegen", "glutenAllegen", "eggAllegen", "dairyAllegen", "mollusksAllegen", "fishAllegen" };
 
     @Override
     public void process() {
@@ -56,9 +60,19 @@ public class AddCommand extends FrontCommand {
                         DAOItem daoItemAllergen = new DAOItem();
                         Item itemAllergen = daoItemAllergen.read(Integer.parseInt(request.getParameter("idItem")));
                         DAOAllergen daoAllergen = new DAOAllergen();
-                        Allergen allergen = new Allergen(itemAllergen, request.getParameter(parameter));
-                        daoAllergen.create(allergen);
-                        itemAllergen.addAllergen(allergen);
+
+                        List<String> recoverAllergen = recoverAllergen();
+                        List<Allergen> allergenListObject = new ArrayList<>();
+
+                        recoverAllergen.forEach((allergen) -> {
+                            allergenListObject.add(new Allergen(itemAllergen, allergen));
+                        });
+
+                        allergenListObject.forEach((object) -> {
+                            daoAllergen.create(object);
+                            itemAllergen.addAllergen(object);
+                        });
+
                         daoItemAllergen.update(itemAllergen);
                         break;
                     default:
@@ -73,6 +87,16 @@ public class AddCommand extends FrontCommand {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private List<String> recoverAllergen() {
+        List<String> resultList = new ArrayList<>();
+        for (int i = 0; i < allergenList.length; i++) {
+            if (request.getParameter(allergenList[i]) != null) {
+                resultList.add(allergenList[i]);
+            }
+        }
+        return resultList;
     }
 
     private String recoverParameter() {
