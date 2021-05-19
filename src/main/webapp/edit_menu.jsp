@@ -43,8 +43,22 @@
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
         <div class="form-check form-switch">
-            <input class="form-check-input" name="ESTEVLADI" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+
+            <input class="form-check-input" name="peanuts" type="checkbox" id="peanutsCheckbox">
+            <label class="form-check-label" for="peanutsCheckbox">Peanuts</label>
+
+            <input class="form-check-input" name="gluten" type="checkbox" id="glutenCheckbox">
+            <label class="form-check-label" for="glutenCheckbox">Gluten</label>
+
+            <input class="form-check-input" name="egg" type="checkbox" id="eggCheckbox">
+            <label class="form-check-label" for="eggCheckbox">Egg</label>
+
+            <input class="form-check-input" name="dairy" type="checkbox" id="dairyCheckbox">
+            <label class="form-check-label" for="dairyCheckbox">Dairy Products</label>
+
+            <input class="form-check-input" name="mollusks" type="checkbox" id="mollusksCheckbox">
+            <label class="form-check-label" for="mollusksCheckbox">Mollusks</label>
+
         </div>
     </button>
 </form>
