@@ -44,14 +44,13 @@
                         Section next = iterator.next();
             %>
             <div class="card-body">
-                <h4 class="card-title">
-                    <%= next.getName() %>
-                </h4>
-                <form action="FrontServlet" method="POST">
-                    <button type="submit" class="col-sm-1 btn btn-outline-danger">
-                        <input type="hidden" name="idMenu" value="<%= menu.getId()%>">
-                        <input type="hidden" name="sectionId" value="<%= next.getId()%>">
-                        <input type="hidden" name="command" value="DeleteCommand">
+                <div class="mb-3 row">
+                    <div class="col-sm-4"></div>
+                    <h4 class="card-title col-sm-3">
+                        <%= next.getName() %>
+                    </h4>
+                    <button class="col-sm-1 btn btn-outline-danger"
+                            onclick='clickDeleteFunction("<%= next.getId() %>", "sectionId")'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -59,7 +58,7 @@
                                   d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                         </svg>
                     </button>
-                </form>
+                </div>
             </div>
             <%
                 Set sectionItems = next.getItems();
@@ -72,20 +71,15 @@
                 %>
                 <li class="list-group-item">
                     <%= item.getName() %> - - - - - - <%= item.getPrice() %>€
-                    <form action="FrontServlet" method="POST">
-                        <button type="submit" class="btn btn-outline-danger">
-                            <input type="hidden" name="idMenu" value="<%= menu.getId()%>">
-                            <input type="hidden" name="itemId" value="<%= item.getId()%>">
-                            <input type="hidden" name="command" value="DeleteCommand">
-                            <input type="hidden" name="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 class="bi bi-trash" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                <path fill-rule="evenodd"
-                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg>
-                        </button>
-                    </form>
+                    <button class="btn btn-outline-danger"
+                            onclick='clickDeleteFunction("<%= item.getId() %>", "itemId")'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd"
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </button>
                     <%
                         if (item.getImage() != null) {
                     %>
@@ -108,7 +102,8 @@
                                 <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                                 <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/>
                             </svg>
-                            <input type='file' hidden name='image' accept="image/*"/>
+                            <input type='file' hidden name='image' id="imageUpload" accept="image/*" required/>
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
                         </label>
                         <input type="hidden" name="command" value="UploadImageEditMenuCommand">
                         <input type="hidden" name="idMenu" value="<%= menu.getId()%>">
@@ -117,6 +112,9 @@
                             Upload
                         </button>
                     </form>
+                    <%
+                        }
+                    %>
                     <form action="FrontServlet" method="POST">
                         <div class="mb-4 row">
                             <div class="col-sm-3"></div>
@@ -190,10 +188,6 @@
                             Allergens
                         </button>
                     </form>
-                    <%
-                        }
-                    %>
-
                     <%
                         Set<Ingredient> ingredients = item.getIngredients();
                         String result = "";
@@ -278,162 +272,27 @@
 </div>
 </body>
 
-<!--
-<li class="list-group-item">
-                    <form action="FrontServlet" method="POST">
-                        <div class="mb-3 row">
-                            <label for="ingredientNameItem1" class="col-sm-3 col-form-label">Add Ingredient: </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" name="ingredientName" id="ingredientNameItem1">
-                            </div>
-                            <input type="hidden" name="command" value="AddCommand">
-                            <input type="hidden" name="idMenu" value="<% //idMenu %>">
-                            <input type="hidden" name="idItem" value="<% //item.getId() %>">
-
-                            <button type="submit" class="col-sm-1 btn btn-outline-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-plus" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </li>
-
-
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-
-                <p class="card-text"> </p>
-<div class="row">
-    <div class="card text-center">
-        <div class="card-header">
-            MENU TITLE
-        </div>
-        <div class="card-body">
-            <h4 class="badge bg-secondary card-title">
-                ONE SECTION
-            </h4>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <p class="card-text">INGREDIENTES</p>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
-
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col">
-        <h5><%= menu.getName() %>
-        </h5>
-    </div>
-</div>
-<%
-    if (sections != null) {
-        Iterator<Section> iterator = sections.iterator();
-        while (iterator.hasNext()) {
-            Section next = iterator.next();
-%>
-<div class="row">
-
-    <div class="col-1">
-        <span class="badge bg-secondary"><%= next.getName() %></span>
-    </div>
-</div>
-<%
-    Set sectionItems = next.getItems();
-    if (sectionItems != null) {
-        Iterator<Item> itemIterator = sectionItems.iterator();
-        while (itemIterator.hasNext()) {
-            Item item = itemIterator.next();
-%>
-<div class="row">
-    <div class="col-1">
-    </div>
-    <div class="col-3">
-
-        <span><%= item.getName() %> - - - - - - <%= item.getPrice() %>€</span>
-    </div>
-</div>
-<div class="row">
-    <div class="col-1">
-    </div>
-    <div class="col-3">
-        <%
-            Set<Ingredient> ingredients = item.getIngredients();
-            String result = "";
-            for (Ingredient i :
-                    ingredients) {
-                result += " " + i.getName() + ",";
-            }
-        %>
-        <span><%= result %></span>
-    </div>
-</div>
-<div class="row">
-    <div class="col-2">
-
-    </div>
-    <div class="col-2">
-        <form action="FrontServlet" method="POST">
-            <label for="ingredientNameItem" class="form-label">Ingredient: </label>
-            <input type="text" class="form-control" name="ingredientName" id="ingredientNameItem">
-            <input type="hidden" name="command" value="AddCommand">
-            <input type="hidden" name="idMenu" value="<%= idMenu %>">
-            <input type="hidden" name="idItem" value="<%= item.getId() %>">
-
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
-</div>
-<% }
-}%>
-<div class="row">
-    <div class="col-2">
-
-    </div>
-    <div class="col-4">
-        <form action="FrontServlet" method="POST">
-            <label for="itemNameNew" class="form-label">Item: </label>
-            <input type="text" class="form-control" name="itemName" id="itemNameNew">
-            <input type="hidden" name="command" value="AddCommand">
-            <input type="number" class="form-control" name="itemPrice" value="0">
-            <input type="hidden" name="idMenu" value="<%= idMenu %>">
-            <input type="hidden" name="idSection" value="<%= next.getId() %>">
-
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
-</div>
-<% }
-}
-%>
-<div class="row">
-    <div class="col-4">
-        <form action="FrontServlet" method="POST">
-            <label for="sectionName" class="col-form-label">Section: </label>
-            <input type="text" class="form-control" name="sectionName" id="sectionName" value="">
-            <input type="hidden" name="command" value="AddCommand">
-            <input type="hidden" name="idMenu" value="<%= idMenu %>">
-
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
-</div>
-</ul>-->
-
-<div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
-    <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5;">
+    <div id="imgToastDiv" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-body">
             <img src="" id="imageToast" class="img-thumbnail" height="500px" width="500px">
             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+        </div>
+    </div>
+</div>
+<div class="position-fixed top-50 start-50 translate-middle" style="z-index: 5">
+    <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+            Are you sure you want to delete this element?
+            <div class="mt-2 pt-2 border-top">
+                <form action="FrontServlet" method="post">
+                    <input type="hidden" name="command" value="DeleteCommand">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <input type="hidden" id="hiddenConfirm" name="" value="">
+                    <input type="hidden" name="idMenu" value="<%= idMenu %>">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cancel</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -442,10 +301,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <script>
     function clickShowImage(url) {
-        var myAlert = document.getElementById('deleteToast');//select id of toast
+        var myAlert = document.getElementById('imgToastDiv');//select id of toast
         var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
         bsAlert.show();//show it
         document.getElementById('imageToast').src = document.getElementById(url).src;
+    };
+</script>
+<script>
+    function clickDeleteFunction(id, name) {
+        var myAlert = document.getElementById('deleteToast');//select id of toast
+        var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
+        bsAlert.show();//show it
+        document.getElementById('hiddenConfirm').value = id;
+        document.getElementById('hiddenConfirm').name = name;
     };
 </script>
 

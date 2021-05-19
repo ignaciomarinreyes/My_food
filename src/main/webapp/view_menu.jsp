@@ -1,10 +1,7 @@
 <%@page import="java.util.List"%>
-<%@ page import="model.Menu" %>
-<%@ page import="model.Item" %>
-<%@ page import="model.Section" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="model.Ingredient" %><%--
+<%@ page import="model.*" %><%--
   Created by IntelliJ IDEA.
   User: Luicko
   Date: 03/05/2021
@@ -98,6 +95,60 @@
                             result += " " + i.getName() + ",";
                         }
                     %>
+                    <div class="mb-4 row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("peanutsAllegen")) {
+                            %>
+                            <img src="IconoAlergenoCacahuete-Peanuts_icon-icons.com_67604.png">
+                            <% break; }
+                            } %>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("glutenAllegen")) {
+                            %>
+                            <img src="IconoAlergenoGluten-Gluten_icon-icons.com_67600.png">
+                            <% break; }
+                            } %>
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("eggAllegen")) {
+                            %>
+                            <img src="IconoAlergenoHuevo-Egg_icon-icons.com_67598.png">
+                            <% break; }
+                            } %>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("dairyAllegen")) {
+                            %>
+                            <img src="IconoAlergenoLacteos-DairyProducts_icon-icons.com_67597.png">
+                            <% break; }
+                            } %>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("mollusksAllegen")) {
+                            %>
+                            <img src="IconoAlergenoMoluscos-Mollusks_icon-icons.com_67596.png">
+                            <% break; }
+                            } %>
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("fishAllegen")) {
+                            %>
+                            <img src="Fish_icon-icons.com_67594.png">
+                            <% break; }
+                            } %>
+                        </div>
+                    </div>
                     <br>
                     <% if (!result.equals("")) {%>
                     Ingredients: <%= result %>
