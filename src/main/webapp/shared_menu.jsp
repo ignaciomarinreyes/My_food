@@ -1,5 +1,6 @@
 <%@ page import="model.Menu" %>
 <%@ page import="model.Item" %>
+<%@ page import="model.Allergen" %>
 <%@ page import="model.Section" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.Iterator" %>
@@ -15,11 +16,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <title>Welcome!</title>
     <style>
         body {
-            background-color: #f8f9fa!important;
+            background-color: #f8f9fa !important;
         }
     </style>
 
@@ -76,6 +78,61 @@
                     <% if (!result.equals("")) {%>
                     Ingredients: <%= result %>
                     <% } %>
+
+                    <div class="mb-4 row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("peanutsAllegen")) {
+                            %>
+                            <img src="IconoAlergenoCacahuete-Peanuts_icon-icons.com_67604.png">
+                            <% }
+                            } %>>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("glutenAllegen")) {
+                            %>
+                            <img src="IconoAlergenoGluten-Gluten_icon-icons.com_67600.png">
+                            <% }
+                            } %>>
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("eggAllegen")) {
+                            %>
+                            <img src="IconoAlergenoHuevo-Egg_icon-icons.com_67598.png">
+                            <% }
+                            } %>>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("dairyAllegen")) {
+                            %>
+                            <img src="IconoAlergenoLacteos-DairyProducts_icon-icons.com_67597.png">
+                            <% }
+                            } %>>
+
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("mollusksAllegen")) {
+                            %>
+                            <img src="IconoAlergenoMoluscos-Mollusks_icon-icons.com_67596.png">
+                            <% }
+                            } %>>
+                        </div>
+                        <div class="col-sm-1 form-check form-switch">
+                            <% for (Allergen allergen : item.getAllergens()) {
+                                if (allergen.getName().equals("fishAllegen")) {
+                            %>
+                            <img src="Fish_icon-icons.com_67594.png">
+                            <% }
+                            } %>>
+                        </div>
+                    </div>
                 </li>
                 <%
                     }
